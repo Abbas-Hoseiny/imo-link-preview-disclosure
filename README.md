@@ -1,9 +1,12 @@
 # Zero-Click IP Leak in IMO Messenger via Client-Side Link Preview
 
-CVE: pending (MITRE #1993721 resubmission)
-Vendor: PageBites, Inc. (IMO Messenger, Android/iOS/macOS/Windows)
-Reporter: Abbas Hoseiny (abbas.hoseiny@gmx.de) — independent
-Disclosure: pending — earliest 2026-05-30 (90 days after CERT/CC submission)
+> **Full illustrated write-up:** https://hoseiny.de/en/cvd/imo/
+
+**Severity:** Medium — CVSS 3.1 `AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:N/A:N` (Base 4.3). The impact is limited to disclosure of an IP address plus device metadata (`C:Low`), which caps the score at Medium.
+**CVE:** requested — MITRE #1993721 (pending)
+**Vendor:** PageBites, Inc. (IMO Messenger — Android / iOS / macOS / Windows)
+**Reporter:** Abbas Hoseiny — independent · abbas@hoseiny.de
+**Status:** Public. CERT/CC (case VU#138533) deprioritised the case on 2026-08-24 and advised public disclosure after roughly a year of vendor silence. All findings remain unpatched.
 
 ## TL;DR
 
@@ -11,7 +14,7 @@ IMO Messenger auto-fetches URLs from the recipient device when a message contain
 
 ## What the bug is
 
-IMO generates link previews client-side. When a message arrives that contains a URL, IMO performs an HTTP GET from the recipient's device before the user opens the chat. The request includes:
+IMO generates link previews client-side. When a message arrives that contains a URL, The recipient's device performs an HTTP GET when the message arrives in the chat — opening the chat is enough, and on iOS it was observed firing before any UI render (confirmed by packet capture). No tap on the link is ever required. The request includes:
 
 - Real IP (geolocation to city level)
 - Device User-Agent (model, OS version)
@@ -83,8 +86,9 @@ Either pattern eliminates the leak. The Windows build already operates this way 
 - 2026-04-21 — CERT/CC asked about vendor status. None.
 - 2026-05-06 — CERT/CC outreach attempt to feedback@imo.im. No response.
 - 2026-05-19 — CERT/CC second outreach attempt. No response.
-- 2026-05-30 — Earliest public disclosure date (90 days after CERT/CC submission). Updated when CVE assignment confirmed.
+- 2026-08-24 — CERT/CC deprioritised the case and advised public disclosure; vendor still unresponsive. All findings remain unpatched.
+- 2026-10 — Public disclosure. Full illustrated write-up: https://hoseiny.de/en/cvd/imo/
 
-Vendor remained unresponsive throughout — 270+ days as of the publication date.
+Vendor remained unresponsive throughout — over a year since the first contact on 2025-08-25. All findings unpatched at publication.
 
 **Credits:** Reported by Abbas Hoseiny (independent). Coordinated through CERT/CC (CISA Vulnerability Response and Coordination, case VU#138533). MITRE CVE assignment pending (#1993721). Parallel notifications to BSI CERT-Bund and Apple Product Security.
