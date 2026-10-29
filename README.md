@@ -58,7 +58,7 @@ PoC and detailed instructions in [poc/](poc/). No code required — webhook.site
 | Platform | Version | Affected | Notes |
 |----------|---------|----------|-------|
 | Android | 2026.01.1031 | Yes | Google Play, also leaks BIGO supercookie |
-| iOS | Build 846 (release-2026.1.1) | Yes | App Store |
+| iOS | 2026.1.3 | Yes | App Store (CVE-filed version) |
 | macOS | 2.27.163 | Yes | Mac App Store |
 | Windows | 1.5.3.3 | No | Feature was never implemented in the .NET build |
 
